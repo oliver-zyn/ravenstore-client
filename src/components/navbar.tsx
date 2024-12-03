@@ -38,7 +38,7 @@ const categories = [
 
 export function Navbar() {
   return (
-    <header className="flex h-20 w-full items-center px-4 md:px-6 justify-between">
+    <header className="flex h-20 w-full items-center px-4 md:px-6 justify-between m-auto max-w-screen-2xl">
       <NavbarMobile />
 
       <NavigationMenu className="hidden lg:flex">
