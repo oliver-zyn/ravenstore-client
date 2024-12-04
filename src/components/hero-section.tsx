@@ -1,21 +1,21 @@
 import heroImg from '@/assets/Hero Image.png'
 import { Button } from './ui/button'
 import { ArrowRight } from 'lucide-react'
+import { ContainerDefault } from './container-default'
 
 export function HeroSection() {
   return (
     <section className="bg-accent">
-      <div className="m-auto max-w-screen-2xl h-[36rem] px-4 md:px-6">
+      <ContainerDefault className="h-[36rem]">
         <div className="grid md:grid-cols-2 gap-4 items-center h-full">
           <div className="text-center md:text-left">
             <h1 className="text-4xl font-semibold">
               Fresh Arrivals Online
             </h1>
-            <p className="mt-3 text-lg text-muted-foreground">
-              Simplify team collaboration with CloudMaster, the ultimate tool
-              for efficient project management.
+            <p className="mt-5 text-lg text-muted-foreground">
+              Discover Our Newest Collection Today.
             </p>
-            <Button size="lg" className="mt-7">
+            <Button size="lg" className="mt-16">
               Ver coleção
               <ArrowRight />
             </Button>
@@ -25,11 +25,10 @@ export function HeroSection() {
             <img
               src={heroImg}
               className="z-10 relative max-w-[22rem]"
-              alt="Image Description"
             />
           </div>
         </div>
-      </div>
+      </ContainerDefault>
     </section>
   )
 }

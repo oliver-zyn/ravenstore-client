@@ -9,9 +9,10 @@ import {
 } from "@/components/ui/navigation-menu"
 import { Input } from "./ui/input"
 import { Bird, SearchIcon, ShoppingCartIcon, User } from "lucide-react"
-import { ModeToggle } from "./mode-toggle"
+//import { ModeToggle } from "./mode-toggle"
 import { NavbarMobile } from "./navbar-mobile"
 import { cn } from "@/lib/utils"
+import { ContainerDefault } from "./container-default"
 
 const categories = [
   {
@@ -38,7 +39,7 @@ const categories = [
 
 export function Navbar() {
   return (
-    <header className="flex h-20 w-full items-center px-4 md:px-6 justify-between m-auto max-w-screen-2xl">
+    <ContainerDefault className="flex h-20 w-full items-center justify-between">
       <NavbarMobile />
 
       <NavigationMenu className="hidden lg:flex">
@@ -103,11 +104,11 @@ export function Navbar() {
               <User className="h-6 w-6" />
             </NavigationMenuLink>
           </NavigationMenuItem>
-          <NavigationMenuItem>
+          {/* <NavigationMenuItem>
             <ModeToggle />
-          </NavigationMenuItem>
+          </NavigationMenuItem> */}
         </NavigationMenuList>
       </NavigationMenu>
-    </header>
+    </ContainerDefault>
   )
 }
