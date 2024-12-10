@@ -8,11 +8,12 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
 import { Input } from "./ui/input"
-import { Bird, SearchIcon, ShoppingCartIcon, User } from "lucide-react"
+import { Bird, SearchIcon, User } from "lucide-react"
 //import { ModeToggle } from "./mode-toggle"
 import { NavbarMobile } from "./navbar-mobile"
 import { cn } from "@/lib/utils"
 import { ContainerDefault } from "./container-default"
+import { Cart } from "./cart"
 
 const categories = [
   {
@@ -95,9 +96,7 @@ export function Navbar() {
             </div>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <NavigationMenuLink href="/" className={cn(navigationMenuTriggerStyle(), "px-2")}>
-              <ShoppingCartIcon className="h-6 w-6" />
-            </NavigationMenuLink>
+            <Cart />
           </NavigationMenuItem>
           <NavigationMenuItem >
             <NavigationMenuLink href="/" className={cn(navigationMenuTriggerStyle(), "px-2")}>

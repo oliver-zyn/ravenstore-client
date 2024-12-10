@@ -6,7 +6,7 @@ import productImg from '@/assets/product2.png'
 
 export function BrowseSection() {
   return (
-    <section className="bg-accent py-10 mt-44">
+    <section className="bg-accent py-36 md:py-10 mt-44">
       <ContainerDefault >
         <div className="grid md:grid-cols-2 gap-4 items-center justify-center">
           <div className="text-center md:text-left max-w-lg">

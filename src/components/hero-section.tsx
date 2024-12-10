@@ -1,4 +1,4 @@
-import heroImg from '@/assets/Hero Image.png'
+import heroImg from '@/assets/hero-image.png'
 import { Button } from './ui/button'
 import { ArrowRight } from 'lucide-react'
 import { ContainerDefault } from './container-default'

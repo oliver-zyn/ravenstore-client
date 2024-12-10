@@ -4,6 +4,7 @@ import { HeroSection } from "./components/hero-section"
 import { Features } from "./components/features"
 import { BestSeller } from "./components/best-seller"
 import { BrowseSection } from "./components/browse-section"
+import { Footer } from "./components/footer"
 
 export function App() {
   return (
@@ -13,6 +14,7 @@ export function App() {
       <Features />
       <BestSeller />
       <BrowseSection />
+      <Footer />
     </ThemeProvider>
   )
 }
