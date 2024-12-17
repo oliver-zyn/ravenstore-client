@@ -11,35 +11,35 @@ export function Footer() {
     <ContainerDefault className="my-20 flex flex-col">
       <div className="grid grid-cols-2 items-center gap-y-20 md:grid-cols-4">
         <ListLinks
-          title="SUPPORT"
+          title="SUPORTE"
           links={[
             { text: 'FAQ', href: '#' },
-            { text: 'Terms of Use', href: '#' },
-            { text: 'Privacy Policy', href: '#' },
+            { text: 'Termos de uso', href: '#' },
+            { text: 'Política de privacidade', href: '#' },
           ]}
         />
         <ListLinks
-          title="COMPANY"
+          title="EMPRESA"
           links={[
             { text: 'FAQ', href: '#' },
-            { text: 'Terms of Use', href: '#' },
-            { text: 'Privacy Policy', href: '#' },
+            { text: 'Termos de uso', href: '#' },
+            { text: 'Política de privacidade', href: '#' },
           ]}
         />
         <ListLinks
-          title="SHOP"
+          title="LOJA"
           links={[
             { text: 'FAQ', href: '#' },
-            { text: 'Terms of Use', href: '#' },
-            { text: 'Privacy Policy', href: '#' },
+            { text: 'Termos de uso', href: '#' },
+            { text: 'Política de privacidade', href: '#' },
           ]}
         />
         <ListLinks
-          title="ADDRESS"
+          title="ENDEREÇO"
           links={[
             { text: 'FAQ', href: '#' },
-            { text: 'Terms of Use', href: '#' },
-            { text: 'Privacy Policy', href: '#' },
+            { text: 'Termos de uso', href: '#' },
+            { text: 'Política de privacidade', href: '#' },
           ]}
         />
       </div>

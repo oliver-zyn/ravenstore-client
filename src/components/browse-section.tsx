@@ -11,10 +11,10 @@ export function BrowseSection() {
         <div className="grid md:grid-cols-2 gap-4 items-center justify-center">
           <div className="text-center md:text-left max-w-lg">
             <h1 className="text-3xl font-semibold">
-              Browse Our Fashion Paradise!
+              Explore Nossos Melhores Produtos!
             </h1>
             <p className="mt-5 text-base text-muted-foreground">
-              Step into a world of style and explore our diverse collection of clothing categories.
+              Entre em um mundo de estilo e descubra nossa diversa coleção de categorias de roupas.
             </p>
             <Button size="lg" className="mt-16">
               Ver coleção

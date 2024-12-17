@@ -8,8 +8,8 @@ export function BestSeller() {
     <ContainerDefault className="mt-44">
       <div className="flex items-center flex-col">
         <div>
-          <h2 className="text-sm text-primary/60 font-semibold">SHOP NOW</h2>
-          <h1 className="text-2xl font-bold mt-2">Best Selling</h1>
+          <h2 className="text-sm text-primary/60 font-semibold">COMPRE AGORA</h2>
+          <h1 className="text-2xl font-bold mt-2">Mais Vendidos</h1>
         </div>
       </div>
 

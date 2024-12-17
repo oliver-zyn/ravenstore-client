@@ -14,6 +14,9 @@ import { NavbarMobile } from "./navbar-mobile"
 import { cn } from "@/lib/utils"
 import { ContainerDefault } from "./container-default"
 import { Cart } from "./cart"
+import { Link } from "react-router"
+import AuthService from "@/service/AuthService"
+import { Button } from "./ui/button"
 
 const categories = [
   {
@@ -39,6 +42,8 @@ const categories = [
 ]
 
 export function Navbar() {
+  const isAuthenticated = AuthService.isAuthenticated()
+
   return (
     <ContainerDefault className="flex h-20 w-full items-center justify-between">
       <NavbarMobile />
@@ -98,11 +103,32 @@ export function Navbar() {
           <NavigationMenuItem>
             <Cart />
           </NavigationMenuItem>
-          <NavigationMenuItem >
-            <NavigationMenuLink href="/" className={cn(navigationMenuTriggerStyle(), "px-2")}>
-              <User className="h-6 w-6" />
+          {isAuthenticated ? (
+            <NavigationMenuItem >
+            <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "px-2")} asChild>
+              <Link to="/login">
+                <User className="h-6 w-6" />
+              </Link>
             </NavigationMenuLink>
           </NavigationMenuItem>
+          ) : (
+            <>
+            <NavigationMenuItem >
+            <Button variant="ghost" asChild>
+              <Link to="/login">
+                Sign in
+              </Link>
+            </Button>
+          </NavigationMenuItem>
+          <NavigationMenuItem >
+            <Button asChild>
+              <Link to="/signup">
+                Sign up
+              </Link>
+            </Button>
+          </NavigationMenuItem>
+            </>
+          )}
           {/* <NavigationMenuItem>
             <ModeToggle />
           </NavigationMenuItem> */}

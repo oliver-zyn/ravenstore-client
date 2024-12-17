@@ -10,10 +10,10 @@ export function HeroSection() {
         <div className="grid md:grid-cols-2 gap-4 items-center h-full">
           <div className="text-center md:text-left">
             <h1 className="text-4xl font-semibold">
-              Fresh Arrivals Online
+              Novidades Imperdíveis Online
             </h1>
             <p className="mt-5 text-lg text-muted-foreground">
-              Discover Our Newest Collection Today.
+              Descubra Nossa Nova Coleção Hoje.
             </p>
             <Button size="lg" className="mt-16">
               Ver coleção

@@ -18,7 +18,7 @@ export function Cart() {
     <Sheet>
       <SheetTrigger asChild>
         <NavigationMenuLink
-          className={cn(navigationMenuTriggerStyle(), 'px-2')}
+          className={cn(navigationMenuTriggerStyle(), 'px-2 cursor-pointer')}
         >
           <ShoppingCartIcon className="h-6 w-6" />
         </NavigationMenuLink>
