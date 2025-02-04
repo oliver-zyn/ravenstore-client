@@ -6,39 +6,43 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu"
-import { Input } from "./ui/input"
-import { Bird, SearchIcon, User } from "lucide-react"
+} from '@/components/ui/navigation-menu'
+import { Input } from './ui/input'
+import {
+  Bird,
+  SearchIcon,
+} from 'lucide-react'
 //import { ModeToggle } from "./mode-toggle"
-import { NavbarMobile } from "./navbar-mobile"
-import { cn } from "@/lib/utils"
-import { ContainerDefault } from "./container-default"
-import { Cart } from "./cart"
-import { Link } from "react-router"
-import AuthService from "@/service/AuthService"
-import { Button } from "./ui/button"
+import { NavbarMobile } from './navbar-mobile'
+import { ContainerDefault } from './container-default'
+import { Cart } from './cart'
+import { Link } from 'react-router'
+import { AuthService } from '@/service/AuthService'
+import { Button } from './ui/button'
+
+import { UserProfile } from './user-profile'
 
 const categories = [
   {
     id: 1,
-    name: "Camisetas",
-    imgUrl: "https://example.com/category_camisetas.png"
+    name: 'Camisetas',
+    imgUrl: 'https://example.com/category_camisetas.png',
   },
   {
     id: 2,
-    name: "Moletons",
-    imgUrl: "https://example.com/category_camisetas.png"
+    name: 'Moletons',
+    imgUrl: 'https://example.com/category_camisetas.png',
   },
   {
     id: 3,
-    name: "Jaquetas",
-    imgUrl: "https://example.com/category_camisetas.png"
+    name: 'Jaquetas',
+    imgUrl: 'https://example.com/category_camisetas.png',
   },
   {
     id: 4,
-    name: "Regatas",
-    imgUrl: "https://example.com/category_camisetas.png"
-  }
+    name: 'Regatas',
+    imgUrl: 'https://example.com/category_camisetas.png',
+  },
 ]
 
 export function Navbar() {
@@ -50,9 +54,9 @@ export function Navbar() {
 
       <NavigationMenu className="hidden lg:flex">
         <NavigationMenuList>
-          <NavigationMenuItem >
-            <NavigationMenuLink href="/" className={"mr-6 hidden lg:flex"}>
-              <Bird className="h-6 w-6"/>
+          <NavigationMenuItem>
+            <NavigationMenuLink href="/" className={'mr-6 hidden lg:flex'}>
+              <Bird className="h-6 w-6" />
             </NavigationMenuLink>
           </NavigationMenuItem>
         </NavigationMenuList>
@@ -61,17 +65,24 @@ export function Navbar() {
       <NavigationMenu className="hidden lg:flex">
         <NavigationMenuList>
           <NavigationMenuItem>
-            <NavigationMenuLink href="/" className={navigationMenuTriggerStyle()}>
+            <NavigationMenuLink
+              href="/"
+              className={navigationMenuTriggerStyle()}
+            >
               Home
             </NavigationMenuLink>
           </NavigationMenuItem>
           <NavigationMenuItem>
             <NavigationMenuTrigger>Categorias</NavigationMenuTrigger>
             <NavigationMenuContent>
-              <div className="flex flex-col w-[400px] gap-3 p-2 md:w-[500px] lg:w-[200px]">
-                {categories.map(category => {
+              <div className="flex w-[400px] flex-col gap-3 p-2 md:w-[500px] lg:w-[200px]">
+                {categories.map((category) => {
                   return (
-                    <NavigationMenuLink key={category.id} href="/" className="block text-sm font-medium space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
+                    <NavigationMenuLink
+                      key={category.id}
+                      href="/"
+                      className="block space-y-1 rounded-md p-3 text-sm font-medium leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                    >
                       {category.name}
                     </NavigationMenuLink>
                   )
@@ -79,13 +90,19 @@ export function Navbar() {
               </div>
             </NavigationMenuContent>
           </NavigationMenuItem>
-          <NavigationMenuItem >
-            <NavigationMenuLink href="/" className={navigationMenuTriggerStyle()}>
+          <NavigationMenuItem>
+            <NavigationMenuLink
+              href="/"
+              className={navigationMenuTriggerStyle()}
+            >
               Sobre
             </NavigationMenuLink>
           </NavigationMenuItem>
-          <NavigationMenuItem >
-            <NavigationMenuLink href="/" className={navigationMenuTriggerStyle()}>
+          <NavigationMenuItem>
+            <NavigationMenuLink
+              href="/"
+              className={navigationMenuTriggerStyle()}
+            >
               Contato
             </NavigationMenuLink>
           </NavigationMenuItem>
@@ -96,7 +113,7 @@ export function Navbar() {
         <NavigationMenuList className="gap-2">
           <NavigationMenuItem>
             <div className="relative">
-              <SearchIcon className="absolute top-1/2 right-3 -translate-y-1/2 h-4 w-4" />
+              <SearchIcon className="absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2" />
               <Input type="text" placeholder="Buscar..." className="pr-10" />
             </div>
           </NavigationMenuItem>
@@ -104,29 +121,21 @@ export function Navbar() {
             <Cart />
           </NavigationMenuItem>
           {isAuthenticated ? (
-            <NavigationMenuItem >
-            <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "px-2")} asChild>
-              <Link to="/login">
-                <User className="h-6 w-6" />
-              </Link>
-            </NavigationMenuLink>
-          </NavigationMenuItem>
+            <NavigationMenuItem>
+              <UserProfile />
+            </NavigationMenuItem>
           ) : (
             <>
-            <NavigationMenuItem >
-            <Button variant="ghost" asChild>
-              <Link to="/login">
-                Sign in
-              </Link>
-            </Button>
-          </NavigationMenuItem>
-          <NavigationMenuItem >
-            <Button asChild>
-              <Link to="/signup">
-                Sign up
-              </Link>
-            </Button>
-          </NavigationMenuItem>
+              <NavigationMenuItem>
+                <Button variant="ghost" asChild>
+                  <Link to="/login">Sign in</Link>
+                </Button>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <Button asChild>
+                  <Link to="/signup">Sign up</Link>
+                </Button>
+              </NavigationMenuItem>
             </>
           )}
           {/* <NavigationMenuItem>

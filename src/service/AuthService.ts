@@ -1,12 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { IUserLogin, IUserSignUp } from "@/commons/interfaces";
 import { api } from "@/lib/axios";
 
 const signup = async (user: IUserSignUp) => {
   let response;
   try {
-    response = await api.post("/users", user);
+    response = await api.post("/api/users", user);
   } catch (err: any) {
-    response = err.response;
+    response = err.response || { status: 500 };
   }
   return response;
 };
@@ -22,7 +23,7 @@ const login = async (user: IUserLogin): Promise<any> => {
     api.defaults.headers.common["Authorization"] = `Bearer ${response.data.token}`;
 
   } catch (err: any) {
-    response = err.response;
+    response = err.response || { status: 500 };
   }
   return response;
 };
@@ -42,11 +43,9 @@ const logout = (): void => {
   api.defaults.headers.common["Authorization"] = '';
 }
 
-const AuthService = {
+export const AuthService = {
   signup,
   login,
   isAuthenticated,
   logout,
 };
-
-export default AuthService;
