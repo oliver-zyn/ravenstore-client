@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 import { formatToBrazilianCurrency } from '@/lib/utils'
-import { Button } from './ui/button'
+import { Button } from '../../../components/ui/button'
 import { ShoppingBag } from 'lucide-react'
 
 interface ProductCardProps {
@@ -10,11 +10,7 @@ interface ProductCardProps {
   price: number
 }
 
-export function ProductCard({
-  imgUrl,
-  title,
-  price,
-}: ProductCardProps) {
+export function ProductCard({ imgUrl, title, price }: ProductCardProps) {
   return (
     <Card className="min-w-80 max-w-96 flex-1">
       <CardHeader className="pb-3">
@@ -25,9 +21,9 @@ export function ProductCard({
       </CardHeader>
       <CardContent className="text-muted-foreground">
         <Button size="sm">
-            Comprar
-            <ShoppingBag />
-          </Button>
+          Comprar
+          <ShoppingBag />
+        </Button>
         <span className="ml-4 text-sm">{formatToBrazilianCurrency(price)}</span>
       </CardContent>
     </Card>

@@ -12,15 +12,14 @@ import {
   Bird,
   SearchIcon,
 } from 'lucide-react'
-//import { ModeToggle } from "./mode-toggle"
 import { NavbarMobile } from './navbar-mobile'
 import { ContainerDefault } from './container-default'
-import { Cart } from './cart'
+import { CartSheet } from './cart-sheet'
 import { Link } from 'react-router'
-import { AuthService } from '@/service/AuthService'
 import { Button } from './ui/button'
 
 import { UserProfile } from './user-profile'
+import { useAuth } from '@/hooks/use-auth'
 
 const categories = [
   {
@@ -46,7 +45,7 @@ const categories = [
 ]
 
 export function Navbar() {
-  const isAuthenticated = AuthService.isAuthenticated()
+  const { isAuthenticated } = useAuth();
 
   return (
     <ContainerDefault className="flex h-20 w-full items-center justify-between">
@@ -118,7 +117,7 @@ export function Navbar() {
             </div>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <Cart />
+            <CartSheet />
           </NavigationMenuItem>
           {isAuthenticated ? (
             <NavigationMenuItem>
@@ -138,9 +137,6 @@ export function Navbar() {
               </NavigationMenuItem>
             </>
           )}
-          {/* <NavigationMenuItem>
-            <ModeToggle />
-          </NavigationMenuItem> */}
         </NavigationMenuList>
       </NavigationMenu>
     </ContainerDefault>

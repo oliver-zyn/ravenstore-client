@@ -1,5 +1,5 @@
 import { DefaultLayout } from '@/layouts/default-layout'
-import { AuthService } from '@/service/AuthService'
+import { AuthService } from '@/service/auth-service'
 import { Navigate, useLocation } from 'react-router-dom'
 
 export function AuthenticatedRoutes() {

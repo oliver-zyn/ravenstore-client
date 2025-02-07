@@ -1,13 +1,13 @@
-import { ThemeProvider } from "@/components/theme-provider"
 import { BaseRoutes } from "./routes/base-routes"
 import { Toaster } from "./components/ui/toaster"
+import { AuthProvider } from "./contexts/auth-context"
 
 export function App() {
   return (
-    <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
+    <AuthProvider>
       <BaseRoutes />
 
       <Toaster />
-    </ThemeProvider>
+    </AuthProvider>
   )
 }

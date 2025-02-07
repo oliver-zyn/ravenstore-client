@@ -7,8 +7,8 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Link } from 'react-router'
 import { ErrorMessage } from '@/components/error-message-input'
-import { AuthService } from '@/service/AuthService'
-import { useToast } from '@/hooks/use-toast'
+import { toast } from '@/hooks/use-toast'
+import { useAuth } from '@/hooks/use-auth'
 
 type FormValues = {
   email: string
@@ -17,7 +17,7 @@ type FormValues = {
 
 export function LoginPage() {
   const navigate = useNavigate()
-  const { toast } = useToast()
+  const { login } = useAuth()
 
   const {
     register,
@@ -26,19 +26,17 @@ export function LoginPage() {
     setError,
   } = useForm<FormValues>()
 
-  async function onSubmit(data: FormValues) {
-    const response = await AuthService.login(data)
-
-    if (response?.status === 200) {
+  async function handleSubmitForm(data: FormValues) {  
+    const response = await login(data.email, data.password);
+  
+    if (response.status === 200) {
       toast({
         variant: "success",
         description: "Login realizado com sucesso!",
       })
 
-      setTimeout(() => {
-        navigate('/home')
-      }, 2000);
-    } else if (response?.status === 401) {
+      navigate('/home')
+    } else if (response.status === 401) {
       toast({
         variant: "destructive",
         description: "Email ou senha inválidos",
@@ -58,12 +56,12 @@ export function LoginPage() {
         variant: "destructive",
         description: "Ops! Algo deu errado na conexão com o servidor. Tente novamente mais tarde",
       })
-    }
+    }  
   }
 
   return (
     <div className="flex flex-col gap-6">
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(handleSubmitForm)}>
         <div className="flex flex-col gap-6">
           <div className="flex flex-col items-center gap-2">
             <Link

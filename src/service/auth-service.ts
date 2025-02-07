@@ -1,6 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { IUserLogin, IUserSignUp } from "@/commons/interfaces";
 import { api } from "@/lib/axios";
+
+interface IUserSignUp {
+  name: string
+	email: string
+	password: string
+	cpf: string
+}
+
+interface IUserLogin {
+  email: string
+  password: string
+}
 
 const signup = async (user: IUserSignUp) => {
   let response;

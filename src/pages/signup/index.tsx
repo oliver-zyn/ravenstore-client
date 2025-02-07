@@ -2,13 +2,13 @@ import { ErrorMessage } from '@/components/error-message-input'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { useToast } from '@/hooks/use-toast'
-import { AuthService } from '@/service/AuthService'
+import { toast } from '@/hooks/use-toast'
+import { AuthService } from '@/service/auth-service'
 import { Bird } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router'
 
-type FormValues = {
+interface FormValues {
   name: string
   cpf: string
   email: string
@@ -18,7 +18,6 @@ type FormValues = {
 
 export function SignUpPage() {
   const navigate = useNavigate()
-  const { toast } = useToast()
 
   const {
     register,
@@ -30,7 +29,7 @@ export function SignUpPage() {
 
   const password = watch('password')
 
-  async function onSubmit(data: FormValues) {
+  async function handleSubmitForm(data: FormValues) {
     const response = await AuthService.signup(data)
 
     if (response?.status === 200 || response?.status === 201) {
@@ -63,7 +62,7 @@ export function SignUpPage() {
 
   return (
     <div className="flex flex-col gap-6">
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(handleSubmitForm)}>
         <div className="flex flex-col gap-6">
           <div className="flex flex-col items-center gap-2">
             <Link

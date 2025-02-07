@@ -5,6 +5,7 @@ import { LoginPage } from '@/pages/login'
 import { DefaultLayout } from '@/layouts/default-layout'
 import { SignUpPage } from '@/pages/signup'
 import { DefaultAuthenticationLayout } from '@/layouts/default-authentication-layout'
+import { Cart } from '@/pages/cart'
 
 export function BaseRoutes() {
   return (
@@ -13,6 +14,7 @@ export function BaseRoutes() {
         <Route element={<DefaultLayout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/home" element={<HomePage />} />
+          <Route path="/cart" element={<Cart />} />
 
           <Route element={<DefaultAuthenticationLayout />}>
             <Route path="/login" element={<LoginPage />} />

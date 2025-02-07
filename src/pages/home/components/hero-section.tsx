@@ -1,13 +1,13 @@
 import heroImg from '@/assets/hero-image.png'
-import { Button } from './ui/button'
+import { Button } from '../../../components/ui/button'
 import { ArrowRight } from 'lucide-react'
-import { ContainerDefault } from './container-default'
+import { ContainerDefault } from '../../../components/container-default'
 
 export function HeroSection() {
   return (
     <section className="bg-accent">
       <ContainerDefault className="h-[36rem]">
-        <div className="grid md:grid-cols-2 gap-4 items-center h-full">
+        <div className="grid h-full items-center gap-4 md:grid-cols-2">
           <div className="text-center md:text-left">
             <h1 className="text-4xl font-semibold">
               Novidades Imperdíveis Online
@@ -20,12 +20,9 @@ export function HeroSection() {
               <ArrowRight />
             </Button>
           </div>
-          <div className="relative justify-self-end self-end hidden md:flex">
-            <span className="w-[26rem] h-[26rem] bottom-4 right-4 absolute rounded-full bg-accent-foreground/5"></span>
-            <img
-              src={heroImg}
-              className="z-10 relative max-w-[22rem]"
-            />
+          <div className="relative hidden self-end justify-self-end md:flex">
+            <span className="absolute bottom-4 right-4 h-[26rem] w-[26rem] rounded-full bg-accent-foreground/5"></span>
+            <img src={heroImg} className="relative z-10 max-w-[22rem]" />
           </div>
         </div>
       </ContainerDefault>
