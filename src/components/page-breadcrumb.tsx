@@ -8,23 +8,34 @@ import {
 } from '@/components/ui/breadcrumb'
 import { Link } from 'react-router'
 import { ContainerDefault } from './container-default'
+import React from 'react'
 
-export function PageBreadcrumb() {
+interface PageBreadcrumbProps {
+  title: string
+  pages: { text: string; link?: string }[]
+}
+
+export function PageBreadcrumb({ title, pages }: PageBreadcrumbProps) {
   return (
     <div className="w-full bg-accent py-12">
       <ContainerDefault>
-        <h1 className="text-2xl font-semibold pb-2">Carrinho</h1>
+        <h1 className="pb-2 text-2xl font-semibold">{title}</h1>
         <Breadcrumb>
           <BreadcrumbList>
-            <BreadcrumbItem>
-              <BreadcrumbLink asChild>
-                <Link to="/home">Home</Link>
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbPage>Carrinho</BreadcrumbPage>
-            </BreadcrumbItem>
+            {pages.map((page, index) => (
+              <React.Fragment key={index}>
+                <BreadcrumbItem>
+                  {page.link ? (
+                    <BreadcrumbLink asChild>
+                      <Link to={page.link}>{page.text}</Link>
+                    </BreadcrumbLink>
+                  ) : (
+                    <BreadcrumbPage>{page.text}</BreadcrumbPage>
+                  )}
+                </BreadcrumbItem>
+                {index < pages.length - 1 && <BreadcrumbSeparator />}
+              </React.Fragment>
+            ))}
           </BreadcrumbList>
         </Breadcrumb>
       </ContainerDefault>

@@ -6,6 +6,8 @@ import { DefaultLayout } from '@/layouts/default-layout'
 import { SignUpPage } from '@/pages/signup'
 import { DefaultAuthenticationLayout } from '@/layouts/default-authentication-layout'
 import { Cart } from '@/pages/cart'
+import { Checkout } from '@/pages/checkout'
+import { AfterPayment } from '@/pages/after-payment'
 
 export function BaseRoutes() {
   return (
@@ -22,7 +24,10 @@ export function BaseRoutes() {
           </Route>
         </Route>
 
-        <Route element={<AuthenticatedRoutes />}></Route>
+        <Route element={<AuthenticatedRoutes />}>
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/after-payment" element={<AfterPayment />} />
+        </Route>
       </Routes>
     </>
   )

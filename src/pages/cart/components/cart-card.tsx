@@ -13,7 +13,7 @@ export function CartCard() {
   }
 
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex flex-col justify-between sm:flex-row md:items-center">
       <div className="flex items-center gap-5">
         <div className="flex h-24 w-24 items-center justify-center bg-accent">
           <img src={imgEx} alt="" className="max-w-20" />
