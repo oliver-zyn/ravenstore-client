@@ -9,15 +9,21 @@ import {
 import { Link } from 'react-router'
 import { ContainerDefault } from './container-default'
 import React from 'react'
+import { cn } from '@/lib/utils'
 
 interface PageBreadcrumbProps {
   title: string
   pages: { text: string; link?: string }[]
+  className?: string
 }
 
-export function PageBreadcrumb({ title, pages }: PageBreadcrumbProps) {
+export function PageBreadcrumb({
+  title,
+  pages,
+  className,
+}: PageBreadcrumbProps) {
   return (
-    <div className="w-full bg-accent py-12">
+    <div className={cn('w-full bg-accent py-12', className)}>
       <ContainerDefault>
         <h1 className="pb-2 text-2xl font-semibold">{title}</h1>
         <Breadcrumb>

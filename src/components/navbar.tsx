@@ -8,10 +8,7 @@ import {
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu'
 import { Input } from './ui/input'
-import {
-  Bird,
-  SearchIcon,
-} from 'lucide-react'
+import { Bird, SearchIcon } from 'lucide-react'
 import { NavbarMobile } from './navbar-mobile'
 import { ContainerDefault } from './container-default'
 import { CartSheet } from './cart-sheet'
@@ -45,7 +42,7 @@ const categories = [
 ]
 
 export function Navbar() {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated } = useAuth()
 
   return (
     <ContainerDefault className="flex h-20 w-full items-center justify-between">
@@ -54,8 +51,10 @@ export function Navbar() {
       <NavigationMenu className="hidden lg:flex">
         <NavigationMenuList>
           <NavigationMenuItem>
-            <NavigationMenuLink href="/" className={'mr-6 hidden lg:flex'}>
-              <Bird className="h-6 w-6" />
+            <NavigationMenuLink className={'mr-6 hidden lg:flex'} asChild>
+              <Link to="/">
+                <Bird className="h-6 w-6" />
+              </Link>
             </NavigationMenuLink>
           </NavigationMenuItem>
         </NavigationMenuList>
@@ -65,10 +64,10 @@ export function Navbar() {
         <NavigationMenuList>
           <NavigationMenuItem>
             <NavigationMenuLink
-              href="/"
               className={navigationMenuTriggerStyle()}
+              asChild
             >
-              Home
+              <Link to="/">Home</Link>
             </NavigationMenuLink>
           </NavigationMenuItem>
           <NavigationMenuItem>
@@ -79,10 +78,10 @@ export function Navbar() {
                   return (
                     <NavigationMenuLink
                       key={category.id}
-                      href="/"
                       className="block space-y-1 rounded-md p-3 text-sm font-medium leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                      asChild
                     >
-                      {category.name}
+                      <Link to="/">{category.name}</Link>
                     </NavigationMenuLink>
                   )
                 })}
