@@ -1,9 +1,33 @@
+import { useEffect, useState } from 'react'
+import { api } from '@/lib/axios'
 import { ContainerDefault } from '../../../components/container-default'
-import { ProductCard } from './product-card'
+import { ProductCard } from '../../../components/product-card'
 
-import productImg from '@/assets/product1.png'
+interface Product {
+  id: number
+  name: string
+  defaultSku: {
+    imageUrl: string
+    price: number
+  }
+}
 
 export function BestSeller() {
+  const [products, setProducts] = useState<Product[]>([])
+
+  useEffect(() => {
+    async function fetchBestSellers() {
+      try {
+        const response = await api.get('/api/products/search?page=0&size=4')
+        setProducts(response.data.content)
+      } catch (error) {
+        console.error('Erro ao buscar produtos mais vendidos:', error)
+      }
+    }
+
+    fetchBestSellers()
+  }, [])
+
   return (
     <ContainerDefault className="mt-44">
       <div className="flex flex-col items-center">
@@ -15,23 +39,18 @@ export function BestSeller() {
         </div>
       </div>
 
-      <div className="mt-20 flex flex-wrap items-center justify-center">
-        <ProductCard
-          imgUrl={productImg}
-          title="Classic Monochrome Tees"
-          price={35.0}
-        />
-        <ProductCard
-          imgUrl={productImg}
-          title="Monochromatic Wardrobe"
-          price={35.0}
-        />
-        <ProductCard
-          imgUrl={productImg}
-          title="Essential Neutrals"
-          price={35.0}
-        />
-        <ProductCard imgUrl={productImg} title="UTRAANET Black" price={35.0} />
+      <div className="mt-20 flex flex-wrap items-center justify-center gap-6">
+        {products.map((product) => {
+          return (
+            <ProductCard
+              key={product.id}
+              id={product.id}
+              imgUrl={product.defaultSku.imageUrl}
+              title={product.name}
+              price={product.defaultSku.price}
+            />
+          )
+        })}
       </div>
     </ContainerDefault>
   )

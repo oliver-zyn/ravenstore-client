@@ -2,6 +2,7 @@ import heroImg from '@/assets/hero-image.png'
 import { Button } from '../../../components/ui/button'
 import { ArrowRight } from 'lucide-react'
 import { ContainerDefault } from '../../../components/container-default'
+import { Link } from 'react-router'
 
 export function HeroSection() {
   return (
@@ -15,9 +16,11 @@ export function HeroSection() {
             <p className="mt-5 text-lg text-muted-foreground">
               Descubra Nossa Nova Coleção Hoje.
             </p>
-            <Button size="lg" className="mt-16">
-              Ver coleção
-              <ArrowRight />
+            <Button size="lg" className="mt-16" asChild>
+              <Link to="/products">
+                Ver coleção
+                <ArrowRight />
+              </Link>
             </Button>
           </div>
           <div className="relative hidden self-end justify-self-end md:flex">

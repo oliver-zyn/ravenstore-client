@@ -9,7 +9,7 @@ interface CartCounter {
 
 export function CartCounter({ productCount, onUpdateCounter, size }: CartCounter) {
   return (
-    <div className="flex items-center rounded-md border border-input">
+    <div className="flex justify-center items-center rounded-md border border-input max-w-28 w-auto">
       <Button
         className={size === "lg" ? "w-10 h-10" : "p-4"}
         variant="ghost"

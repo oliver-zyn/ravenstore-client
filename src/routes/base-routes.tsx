@@ -8,6 +8,8 @@ import { DefaultAuthenticationLayout } from '@/layouts/default-authentication-la
 import { Cart } from '@/pages/cart'
 import { Checkout } from '@/pages/checkout'
 import { AfterPayment } from '@/pages/after-payment'
+import { Products } from '@/pages/products'
+import { ProductPage } from '@/pages/product'
 
 export function BaseRoutes() {
   return (
@@ -17,6 +19,8 @@ export function BaseRoutes() {
           <Route path="/" element={<HomePage />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/product/:id" element={<ProductPage />} />
 
           <Route element={<DefaultAuthenticationLayout />}>
             <Route path="/login" element={<LoginPage />} />

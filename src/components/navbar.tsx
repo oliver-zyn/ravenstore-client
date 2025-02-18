@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react'
+import { api } from '@/lib/axios'
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -14,35 +16,29 @@ import { ContainerDefault } from './container-default'
 import { CartSheet } from './cart-sheet'
 import { Link } from 'react-router'
 import { Button } from './ui/button'
-
 import { UserProfile } from './user-profile'
 import { useAuth } from '@/hooks/use-auth'
 
-const categories = [
-  {
-    id: 1,
-    name: 'Camisetas',
-    imgUrl: 'https://example.com/category_camisetas.png',
-  },
-  {
-    id: 2,
-    name: 'Moletons',
-    imgUrl: 'https://example.com/category_camisetas.png',
-  },
-  {
-    id: 3,
-    name: 'Jaquetas',
-    imgUrl: 'https://example.com/category_camisetas.png',
-  },
-  {
-    id: 4,
-    name: 'Regatas',
-    imgUrl: 'https://example.com/category_camisetas.png',
-  },
-]
+interface Category {
+  id: number
+  name: string
+}
 
 export function Navbar() {
   const { isAuthenticated } = useAuth()
+  const [categories, setCategories] = useState<Category[]>([])
+
+  useEffect(() => {
+    async function fetchCategories() {
+      try {
+        const response = await api.get('/api/categories')
+        setCategories(response.data)
+      } catch (error) {
+        console.error('Erro ao buscar categorias:', error)
+      }
+    }
+    fetchCategories()
+  }, [])
 
   return (
     <ContainerDefault className="flex h-20 w-full items-center justify-between">
@@ -74,17 +70,17 @@ export function Navbar() {
             <NavigationMenuTrigger>Categorias</NavigationMenuTrigger>
             <NavigationMenuContent>
               <div className="flex w-[400px] flex-col gap-3 p-2 md:w-[500px] lg:w-[200px]">
-                {categories.map((category) => {
-                  return (
-                    <NavigationMenuLink
-                      key={category.id}
-                      className="block space-y-1 rounded-md p-3 text-sm font-medium leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                      asChild
-                    >
-                      <Link to="/">{category.name}</Link>
-                    </NavigationMenuLink>
-                  )
-                })}
+                {categories.map((category) => (
+                  <NavigationMenuLink
+                    key={category.id}
+                    className="block cursor-pointer space-y-1 rounded-md p-3 text-sm font-medium leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                    asChild
+                  >
+                    <Link to={`/products?categoryIds=${category.id}`}>
+                      {category.name}
+                    </Link>
+                  </NavigationMenuLink>
+                ))}
               </div>
             </NavigationMenuContent>
           </NavigationMenuItem>

@@ -12,7 +12,7 @@ import React from 'react'
 import { cn } from '@/lib/utils'
 
 interface PageBreadcrumbProps {
-  title: string
+  title?: string
   pages: { text: string; link?: string }[]
   className?: string
 }

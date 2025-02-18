@@ -14,7 +14,7 @@ interface FeatureCardProps {
 
 export function FeatureCard({ icon, title, description }: FeatureCardProps) {
   return (
-    <Card className="max-w-96 min-w-80 flex-1">
+    <Card className="max-w-96 min-w-80 flex-1 shadow-none">
       <CardHeader className="pb-3">
         <div className="flex items-center justify-center bg-accent w-12 h-12 rounded-full mb-3">
           {icon}
