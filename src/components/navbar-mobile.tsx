@@ -1,43 +1,55 @@
-import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet"
-import { Button } from "@/components/ui/button"
-
+import { useEffect, useState } from 'react'
+import {
+  Sheet,
+  SheetTrigger,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from '@/components/ui/sheet'
+import { Button } from '@/components/ui/button'
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion"
-
+} from '@/components/ui/accordion'
 import { Bird, Menu } from 'lucide-react'
+import { api } from '@/lib/axios'
+import { toast } from '@/hooks/use-toast'
+import { Skeleton } from '@/components/ui/skeleton'
 
-const categories = [
-  {
-    id: 1,
-    name: "Camisetas",
-    imgUrl: "https://example.com/category_camisetas.png"
-  },
-  {
-    id: 2,
-    name: "Moletons",
-    imgUrl: "https://example.com/category_camisetas.png"
-  },
-  {
-    id: 3,
-    name: "Jaquetas",
-    imgUrl: "https://example.com/category_camisetas.png"
-  },
-  {
-    id: 4,
-    name: "Regatas",
-    imgUrl: "https://example.com/category_camisetas.png"
-  }
-]
+interface Category {
+  id: number
+  name: string
+  imgUrl: string
+}
 
 export function NavbarMobile() {
+  const [categories, setCategories] = useState<Category[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    async function fetchCategories() {
+      try {
+        const response = await api.get('/api/categories')
+        setCategories(response.data)
+      } catch {
+        toast({
+          variant: 'destructive',
+          description: 'Erro ao carregar categorias.',
+        })
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchCategories()
+  }, [])
+
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="outline" size="icon" className="lg:hidden mr-3">
+        <Button variant="outline" size="icon" className="mr-3 lg:hidden">
           <Menu className="h-6 w-6" />
         </Button>
       </SheetTrigger>
@@ -48,31 +60,50 @@ export function NavbarMobile() {
           </SheetTitle>
         </SheetHeader>
         <div className="flex flex-col py-6">
-          <a href="#" className="block space-y-1 p-6 no-underline outline-none transition-colors text-lg font-medium leading-none hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
+          <a
+            href="#"
+            className="block space-y-1 p-6 text-lg font-medium leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+          >
             Home
           </a>
 
           <Accordion type="single" collapsible>
             <AccordionItem value="item-1" className="border-0">
-              <AccordionTrigger className="px-6 py-6 space-y-1 text-lg leading-none no-underline outline-none hover:no-underline hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
+              <AccordionTrigger className="space-y-1 px-6 py-6 text-lg leading-none no-underline outline-none hover:bg-accent hover:text-accent-foreground hover:no-underline focus:bg-accent focus:text-accent-foreground">
                 Categorias
               </AccordionTrigger>
               <AccordionContent>
-                {categories.map(category => {
-                  return (
-                    <a key={category.id} href="#" className="block text-background bg-foreground space-y-1 p-6 no-underline outline-none transition-colors text-base font-medium leading-none hover:bg-accent-foreground hover:text-accent focus:bg-accent-foreground focus:text-accent-foreground">
+                {loading ? (
+                  <Skeleton className="h-10 w-full rounded-md" />
+                ) : categories.length > 0 ? (
+                  categories.map((category) => (
+                    <a
+                      key={category.id}
+                      href={`/products?category=${category.id}`}
+                      className="block space-y-1 bg-foreground p-6 text-base font-medium leading-none text-background no-underline outline-none transition-colors hover:bg-accent-foreground hover:text-accent focus:bg-accent-foreground focus:text-accent-foreground"
+                    >
                       {category.name}
                     </a>
-                  )
-                })}
+                  ))
+                ) : (
+                  <p className="p-6 text-sm text-muted-foreground">
+                    Nenhuma categoria encontrada.
+                  </p>
+                )}
               </AccordionContent>
             </AccordionItem>
           </Accordion>
 
-          <a href="#" className="block space-y-1 p-6 no-underline outline-none transition-colors text-lg font-medium leading-none hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
+          <a
+            href="#"
+            className="block space-y-1 p-6 text-lg font-medium leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+          >
             Sobre
           </a>
-          <a href="#" className="block space-y-1 p-6 no-underline outline-none transition-colors text-lg font-medium leading-none hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
+          <a
+            href="#"
+            className="block space-y-1 p-6 text-lg font-medium leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+          >
             Contato
           </a>
         </div>

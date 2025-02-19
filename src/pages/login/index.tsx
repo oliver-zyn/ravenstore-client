@@ -17,7 +17,7 @@ type FormValues = {
 
 export function LoginPage() {
   const navigate = useNavigate()
-  const { login } = useAuth()
+  const { login, logout } = useAuth()
 
   const {
     register,
@@ -26,7 +26,8 @@ export function LoginPage() {
     setError,
   } = useForm<FormValues>()
 
-  async function handleSubmitForm(data: FormValues) {  
+  async function handleSubmitForm(data: FormValues) { 
+    logout() 
     const response = await login(data.email, data.password);
   
     if (response.status === 200) {

@@ -66,7 +66,7 @@ export function FilterSidebar() {
   }
 
   return (
-    <Card className="w-full max-w-64 border border-input">
+    <Card className="w-full md:max-w-64 max-w-none border border-input mb-5">
       <CardTitle className="p-6 text-lg">Filtros</CardTitle>
       <CardContent>
         <div className="flex flex-col gap-5">
