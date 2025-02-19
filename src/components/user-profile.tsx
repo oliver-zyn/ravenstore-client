@@ -14,7 +14,7 @@ import {
   NavigationMenuLink,
   navigationMenuTriggerStyle,
 } from './ui/navigation-menu'
-import { useNavigate } from 'react-router'
+import { Link, useNavigate } from 'react-router'
 import { toast } from '@/hooks/use-toast'
 import { useAuth } from '@/hooks/use-auth'
 
@@ -45,14 +45,20 @@ export function UserProfile() {
       <DropdownMenuContent className="w-40">
         <DropdownMenuLabel>Minha conta</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          <User /> Perfil
+        <DropdownMenuItem asChild>
+          <Link to="/profile">
+            <User /> Perfil
+          </Link>
         </DropdownMenuItem>
-        <DropdownMenuItem>
-          <MapPinHouse /> Endereços
+        <DropdownMenuItem asChild>
+          <Link to="/profile">
+            <MapPinHouse /> Endereços
+          </Link>
         </DropdownMenuItem>
-        <DropdownMenuItem>
-          <ShoppingBag /> Compras
+        <DropdownMenuItem asChild>
+          <Link to="/profile">
+            <ShoppingBag /> Compras
+          </Link>
         </DropdownMenuItem>
         <DropdownMenuItem onClick={handleLogout}>
           <LogOut /> Logout

@@ -9,7 +9,8 @@ import { Cart } from '@/pages/cart'
 import { Checkout } from '@/pages/checkout'
 import { AfterPayment } from '@/pages/after-payment'
 import { Products } from '@/pages/products'
-import { ProductPage } from '@/pages/product'
+import { Product } from '@/pages/product'
+import { Profile } from '@/pages/profile'
 
 export function BaseRoutes() {
   return (
@@ -20,7 +21,7 @@ export function BaseRoutes() {
           <Route path="/home" element={<HomePage />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/products" element={<Products />} />
-          <Route path="/product/:id" element={<ProductPage />} />
+          <Route path="/product/:id" element={<Product />} />
 
           <Route element={<DefaultAuthenticationLayout />}>
             <Route path="/login" element={<LoginPage />} />
@@ -31,6 +32,7 @@ export function BaseRoutes() {
         <Route element={<AuthenticatedRoutes />}>
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/after-payment" element={<AfterPayment />} />
+          <Route path="/profile" element={<Profile />} />
         </Route>
       </Routes>
     </>

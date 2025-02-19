@@ -1,3 +1,4 @@
+import { useCart } from '@/hooks/use-cart'
 import { ContainerDefault } from '@/components/container-default'
 import { PageBreadcrumb } from '@/components/page-breadcrumb'
 import { Separator } from '@/components/ui/separator'
@@ -5,6 +6,8 @@ import { SummaryCard } from './components/summary-card'
 import { CartCard } from './components/cart-card'
 
 export function Cart() {
+  const { cartItems } = useCart()
+
   return (
     <>
       <PageBreadcrumb
@@ -17,14 +20,13 @@ export function Cart() {
           <div className="w-full">
             <Separator />
             <div className="flex max-h-[55vh] flex-col gap-y-6 overflow-auto border-b border-input py-6 pr-5 [&::-webkit-scrollbar-thumb]:bg-muted-foreground [&::-webkit-scrollbar]:w-2">
-              <CartCard />
-              <CartCard />
-              <CartCard />
-              <CartCard />
-              <CartCard />
-              <CartCard />
-              <CartCard />
-              <CartCard />
+              {cartItems.length > 0 ? (
+                cartItems.map((item) => <CartCard key={item.id} item={item} />)
+              ) : (
+                <p className="text-muted-foreground">
+                  Seu carrinho está vazio.
+                </p>
+              )}
             </div>
           </div>
           <SummaryCard />

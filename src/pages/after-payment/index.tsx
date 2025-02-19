@@ -5,10 +5,11 @@ import successImg from '@/assets/success-order.svg'
 import failImg from '@/assets/fail-order.svg'
 import { Button } from '@/components/ui/button'
 import { ArrowRight } from 'lucide-react'
-import { useState } from 'react'
+import { Link, useSearchParams } from 'react-router-dom'
 
 export function AfterPayment() {
-  const [isSuccessOrder, setIsSuccessOrder] = useState(true)
+  const [searchParams] = useSearchParams()
+  const isSuccessOrder = searchParams.get('status') === 'success' // Captura o status da URL
 
   const orderStatus = isSuccessOrder
     ? {
@@ -48,9 +49,11 @@ export function AfterPayment() {
           <p className="max-w-[400px] pb-10 pt-5 text-center text-muted-foreground">
             {orderStatus.description}
           </p>
-          <Button size="lg">
-            Ver meus pedidos
-            <ArrowRight />
+          <Button size="lg" asChild>
+            <Link to={"/profile"}>
+              Ver meus pedidos
+              <ArrowRight />
+            </Link>
           </Button>
         </div>
       </ContainerDefault>

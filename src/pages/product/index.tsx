@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { api } from '@/lib/axios'
 import { ContainerDefault } from '@/components/container-default'
 import { PageBreadcrumb } from '@/components/page-breadcrumb'
@@ -16,6 +16,7 @@ import {
   CarouselPrevious,
   CarouselNext,
 } from '@/components/ui/carousel'
+import { useCart } from '@/hooks/use-cart'
 
 interface Sku {
   id: number
@@ -24,6 +25,7 @@ interface Sku {
   quantity: number
   isDefault: boolean
   sizeAttribute: { attributeValue: string }
+  colorAttribute: { attributeValue: string }
 }
 
 interface Product {
@@ -34,12 +36,14 @@ interface Product {
   skus: Sku[]
 }
 
-export function ProductPage() {
+export function Product() {
   const { id } = useParams<{ id: string }>()
   const [product, setProduct] = useState<Product | null>(null)
   const [loading, setLoading] = useState(true)
   const [selectedSku, setSelectedSku] = useState<Sku | null>(null)
   const [productCount, setProductCount] = useState(1)
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     async function fetchProduct() {
@@ -68,6 +72,28 @@ export function ProductPage() {
 
   function handleUpdateCounter(productCount: number) {
     setProductCount(productCount)
+  }
+
+  const { addToCart } = useCart()
+
+  function handleAddToCart() {
+    if (product && selectedSku) {
+      addToCart({
+        id: product.id,
+        name: product.name,
+        imageUrl: selectedSku.imageUrl,
+        price: selectedSku.price,
+        quantity: productCount,
+        size: selectedSku.sizeAttribute.attributeValue,
+        color: selectedSku.colorAttribute.attributeValue,
+      })
+    }
+  }
+
+  function handleBuyNow() {
+    handleAddToCart()
+
+    navigate("/cart")
   }
 
   return (
@@ -152,10 +178,15 @@ export function ProductPage() {
               </div>
 
               <div className="mt-9 flex max-w-md flex-col gap-4">
-                <Button size="lg" className="w-full">
+                <Button size="lg" className="w-full" onClick={handleBuyNow}>
                   Comprar agora
                 </Button>
-                <Button size="lg" variant="secondary" className="w-full">
+                <Button
+                  size="lg"
+                  variant="secondary"
+                  className="w-full"
+                  onClick={handleAddToCart}
+                >
                   Adicionar ao Carrinho
                 </Button>
               </div>
